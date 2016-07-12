@@ -101,10 +101,12 @@ var SampleApp = React.createClass({
     },
 
     ...
-});```
+});
+```
 
 - Rendering
-  ```
+
+```
     var React = require('react');
 
     var SampleApp = React.createClass({
@@ -131,7 +133,8 @@ var SampleApp = React.createClass({
     });
 
   React.render(<SampleApp />, document.querySelector('body'));
-  ```
+```
+
 - Virtual DOM
 ![virtual DOM](https://s3.amazonaws.com/media-p.slid.es/uploads/477360/images/2408018/lnrn_0201.png)
 
