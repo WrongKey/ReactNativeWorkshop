@@ -13,43 +13,91 @@ import {
   View
 } from 'react-native';
 
-
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  Image,
-  View
-} from 'react-native';
-
-const MOCKED_MOVIES_DATA = [
-  {title: 'title', year: '2016', posters: {thumbnail: 'https://s3.amazonaws.com/media-p.slid.es/uploads/477360/images/2408018/lnrn_0201.png'}},
-];
+const REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 
 class MovieFetcher extends Component {
-  render() {
-    var movie = MOCKED_MOVIES_DATA[0];
-    return (
-      <View style={styles.container}>
-        <Text>{movie.title}</Text>
-        <Text>{movie.year}</Text>
-        <Image source={{uri: movie.posters.thumbnail}} style={styles.thumbnail} />
-      </View>
-    );
-  }
+
+  constructor(props) {
+      super(props);
+      this.state = {
+        movies: null,
+      };
+
+      this.fetchData = this.fetchData.bind(this);
+    }
+
+  componentDidMount() {
+      this.fetchData();
+    }
+
+  fetchData() {
+      fetch(REQUEST_URL)
+        .then((response) => response.json())
+        .then((responseData) => {
+          this.setState({
+            movies: responseData.movies,
+          });
+        })
+        .done();
+    }
+
+    render() {
+       if (!this.state.movies) {
+         return this.renderLoadingView();
+       }
+
+       var movie = this.state.movies[0];
+       return this.renderMovie(movie);
+     }
+
+     renderLoadingView() {
+       return (
+         <View style={styles.container}>
+           <Text>
+             loading……
+           </Text>
+         </View>
+       );
+     }
+
+     renderMovie(movie) {
+       return (
+         <View style={styles.container}>
+           <Image
+             source={{uri: movie.posters.thumbnail}}
+             style={styles.thumbnail}
+           />
+           <View style={styles.rightContainer}>
+             <Text style={styles.title}>{movie.title}</Text>
+             <Text style={styles.year}>{movie.year}</Text>
+           </View>
+         </View>
+       );
+     }
 }
 
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  rightContainer: {
+    flex: 1,
+  },
+  title: {
+   fontSize: 20,
+   marginBottom: 8,
+   textAlign: 'center',
+  },
+  year: {
+   textAlign: 'center',
+  },
   thumbnail: {
-    width: 81,
-    height: 53,
+    width: 53,
+    height: 77,
   }
 });
 
