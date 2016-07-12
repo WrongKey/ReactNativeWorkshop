@@ -1,5 +1,7 @@
 # React Native Workshop For LOOT
 
+
+
 ## 1. Set up environment
 We will need Xcode, node.js, the React Native command line tools, and Watchman.
 
@@ -52,3 +54,10 @@ Now that you have successfully run the app, let's modify it.
 
 Open index.ios.js in your text editor of choice and edit some lines.
 Hit Command⌘ + R in your iOS Simulator to reload the app and see your change!
+
+
+## Learning ES6 and Flexbox Layout
+
+- [ECMAScript 6 — New Features: Overview & Comparison](http://es6-features.org)
+- [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
+- [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
